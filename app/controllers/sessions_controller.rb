@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorize, only: %i[ new create ]
+  skip_before_action :authorize
   def new
   end
 
   def create
-    user = User.find_by(name: params[:name])
+    user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect_to root_path
     else
-      redirect_to login_url, alert: "Invalid username or password"
+      redirect_to login_url, notice: "Invalid username or password"
     end
   end
 
