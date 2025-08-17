@@ -1,15 +1,12 @@
 <section class="vh-100 bg-dark">
-<h1 class="text-center text-light"><%= pluralize(@users.count, 'Result') %></h1>
+<h1 class="text-center text-light"><%= pluralize(@user_from_search.count, 'Result') %></h1>
 <div class="container">
-  <% @users.each do |user| %>
-    <div class="card">
+  <% @user_from_search.each do |user_from_search| %>
+  <div class="card">
       <div class="card-body">
-        <% if user.avatar? %>
-          <%= image_tag("default_avatar.png", class: 'rounded-circle') %>
-        <% end %>
-        <h5 class="card-title"><%= user.username %></h5>
+        <h5 class="card-title"><%= user_from_search.username %></h5>
       </div>
-    </div>
+  </div>
   <% end %>
 </div>
 </section>
