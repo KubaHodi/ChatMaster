@@ -25,6 +25,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.expect(user: [ :username, :password, :password_confirmation ] )
+        params.expect(user: [ :username, :password, :password_confirmation, :avatar, default: 'default_avatar.png' ] )
     end
 end

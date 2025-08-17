@@ -1,1 +1,15 @@
-<h1 class="text-center"><%= pluralize(@users.count, 'Result') %></h1>
+<section class="vh-100 bg-dark">
+<h1 class="text-center text-light"><%= pluralize(@users.count, 'Result') %></h1>
+<div class="container">
+  <% @users.each do |user| %>
+    <div class="card">
+      <div class="card-body">
+        <% if user.avatar? %>
+          <%= image_tag("default_avatar.png", class: 'rounded-circle') %>
+        <% end %>
+        <h5 class="card-title"><%= user.username %></h5>
+      </div>
+    </div>
+  <% end %>
+</div>
+</section>

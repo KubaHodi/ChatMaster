@@ -23,7 +23,9 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
+    <% if session[:user_id].present? %>
+      <%= render "shared/navbar" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
