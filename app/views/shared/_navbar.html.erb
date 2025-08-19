@@ -1,5 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to image_tag("logo.png", class: "logo"), root_path %>
+
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
@@ -12,16 +14,9 @@
       <!-- Left links -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link d-flex flex-column text-center active" aria-current="page" href="#"><i class="fas fa-home fa-lg my-2"></i><span class="small">Home</span></a>
+          <%= link_to "home", root_path, class: "nav-link d-flex flex-column text-center" %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-comment-dots fa-lg my-2"></i><span class="small">Messaging</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
-            role="button" data-mdb-dropdown-init aria-expanded="false">
-          </a>
-          <% if session[:user_id] %>
+          <% if session[:user_id].present? %>
             <%= button_to "logout", logout_path, method: :delete, class: "btn btn-primary" %>
           <% end %>
       <!-- Left links -->
