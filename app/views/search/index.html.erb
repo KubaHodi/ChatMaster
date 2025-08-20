@@ -1,12 +1,15 @@
 <section class="vh-100 bg-dark">
 <h1 class="text-center text-light"><%= pluralize(@user_from_search.count, 'Result') %></h1>
 <div class="container">
-  <% @user_from_search.each do |user_from_search| %>
-  <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= user_from_search.username %></h5>
+  <%= turbo_stream_from "users" %>
+    <div id="users">
+      <% @user_from_search.each do |user_from_search| %>
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= user_from_search.username %></h5>
+          </div>
       </div>
-  </div>
-  <% end %>
+      <% end %>
+    </div>
 </div>
 </section>

@@ -11,8 +11,15 @@ Rails.application.routes.draw do
   controller :users do
     get "register" => :new
     post "register" => :create
+    get "/users", to: "users#index"
   end
 
+  controller :rooms do
+    get "/rooms", to: "rooms#index"
+  end
+
+  resources :rooms
+  resources :users, only: [ :show ]
   get "search", to: "search#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
