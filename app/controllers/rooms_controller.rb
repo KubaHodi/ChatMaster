@@ -10,4 +10,10 @@ class RoomsController < ApplicationController
     def create
         @room = Room.create(name: params[:name])
     end
+
+    def show
+        @current_user = User.find_by(params[:user_id])
+        @room = Room.find(params[:id])
+        
+    end
 end

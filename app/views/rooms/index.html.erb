@@ -1,0 +1,11 @@
+<section class="vh-100 bg-dark">
+    <h1 class="text-white">Avaiable rooms</h1>
+        <%= turbo_stream_from "rooms" %>
+            <div id="rooms">
+                <%= render @rooms %>
+            </div>
+        <%= button_to "Back", root_path, method: :get, class: "btn btn-primary m-2" %>
+
+        <h2 class="text-white">Create new room</h2>
+        <%= render "layouts/new_room_form" %>       
+</section>

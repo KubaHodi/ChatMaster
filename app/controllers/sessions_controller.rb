@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   skip_before_action :authorize
+  helper_method :logged_user
   def new
+    if logged_in?
+      redirect_to root_path
+    end
   end
 
   def create
