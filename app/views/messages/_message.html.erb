@@ -1,0 +1,6 @@
+<div>
+    <% if !message.room.is_private %>
+        <p class="name"> <%= message.user.username %></p>
+    <% end %>
+    <%= message.content %>
+</div>

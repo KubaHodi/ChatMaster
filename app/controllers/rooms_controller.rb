@@ -12,8 +12,8 @@ class RoomsController < ApplicationController
     end
 
     def show
-        @current_user = User.find_by(params[:user_id])
+        @current_user = logged_user
         @room = Room.find(params[:id])
-        
+        @message = Message.new     
     end
 end

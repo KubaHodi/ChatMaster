@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     get "/rooms", to: "rooms#index"
   end
 
-  resources :rooms
+  resources :rooms do
+    resources :messages
+  end
   resources :users, only: [ :show ]
   get "search", to: "search#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
