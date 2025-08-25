@@ -4,3 +4,24 @@
 .logo{
   width: 125px;
 }
+
+.name{
+  font-size: small;
+  font-style: italic;
+  color: $gray-300;
+}
+
+#room_container{
+  padding: 5px;
+  color: white;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#message_block{
+  background-color: $primary;
+  margin: 2%;
+  width: fit-content;
+  padding: 1%;
+  border-radius: 25px;
+}

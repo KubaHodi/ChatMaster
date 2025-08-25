@@ -1,5 +1,17 @@
-<%= turbo_stream_from "room" %>
-    <div id="messages">
-    
+<section class="bg-dark p-2">
+    <%= turbo_stream_from "room" %>
+    <div id="rooms">
+        <h1 class="text-white"><%= @room.name %> Room</h1>
+    </div>
+    <div id="room_container" class="bg-dark">
+        <% if @room %>
+            <div id="room">
+                <%= turbo_stream_from @room %>
+                <div id="messages">
+                    <%= render @messages %>
+                </div>
+            </div>
+        <% end %>
     </div>
     <%= render "layouts/new_message_form" %>
+</section>
