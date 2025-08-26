@@ -14,7 +14,6 @@ class RoomsController < ApplicationController
         @current_user = logged_user
         @room = Room.find(params[:id])
         @message = Message.new     
-        @messages = @room.messages.order(created_at: :asc)
-        
+        @messages = @room.messages.order(created_at: :asc)      
     end
 end

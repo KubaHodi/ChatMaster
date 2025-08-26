@@ -14,14 +14,24 @@
 #room_container{
   padding: 5px;
   color: white;
-  overflow: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
-#message_block{
-  background-color: $primary;
+.message_block{
   margin: 2%;
   width: fit-content;
   padding: 1%;
   border-radius: 25px;
+  clear: both;
+}
+
+.theirs{
+  background-color: $primary;
+  float: left;
+}
+
+.mine{
+  background-color: $secondary;
+  float: right;
 }
