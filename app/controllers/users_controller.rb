@@ -6,6 +6,19 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+        @current_user =  logged_user
+        @users = User.all_except(@current_user)
+
+        @rooms = Room.public_rooms
+        @room = Room.new
+        @room_name = get_name(@user, @current_user)
+        @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, @current_user], @room_name)
+
+        @message = Message.new
+        @messages = @single_room.messages
+
+        render "rooms/show"
+
     end
 
     def new
@@ -34,5 +47,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.expect(user: [ :username, :password, :password_confirmation, :avatar ] )
+    end
+
+    def get_name(user_1, user_2)
+        users = [user_1, user_2].sort
+        "private_#{users[0].id}_#{users[1].id}"
     end
 end
