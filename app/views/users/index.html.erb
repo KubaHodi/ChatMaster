@@ -1,0 +1,7 @@
+<section class="vh-100 bg-dark">
+    <%= turbo_stream_from "users" %>
+    <div id="users">
+        <%= render @users %>
+    </div>
+    <%= button_to "Back", root_path, method: :get, class: "btn btn-primary m-2" %>
+</section>
