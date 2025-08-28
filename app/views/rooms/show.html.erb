@@ -1,12 +1,12 @@
 <section class="bg-dark p-2">
     <%= turbo_stream_from "rooms" %>
     <div id="rooms">
-        <h1 class="text-white"><%= @room.name %> Room</h1>
+        <h1 class="text-white"><%= @user&.username || @single_room.name %></h1>
     </div>
     <div id="room_container" class="bg-dark vh-100">
         <% if @room %>
             <div id="room">
-                <%= turbo_stream_from @room %>
+                <%= turbo_stream_from @single_room %>
                 <div id="messages" data-controller="messages">
                     <%= render @messages %>
                 </div>

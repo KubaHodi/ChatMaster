@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     post "register" => :create
     get "/users", to: "users#index"
   end
+  resources :users
 
   controller :rooms do
     get "/rooms", to: "rooms#index"
