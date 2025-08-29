@@ -1,2 +1,37 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.logo{
+  width: 125px;
+}
+
+.name{
+  font-size: larger;
+  font-weight: bold;
+  color: $gray-300;
+}
+
+#room_container{
+  padding: 5px;
+  color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.message_block{
+  margin: 2%;
+  width: fit-content;
+  padding: 1%;
+  border-radius: 25px;
+  clear: both;
+}
+
+.theirs{
+  background-color: $primary;
+  float: left;
+}
+
+.mine{
+  background-color: $secondary;
+  float: right;
+}

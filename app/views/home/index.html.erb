@@ -1,0 +1,13 @@
+<section class="vh-100 bg-dark">
+    <div class="container-fluid bg-dark text-white">
+        <h1>Welcome to Chatmaster app!<h1>
+        <h2>Our currect status: </h2>
+        <p>Number of users: <%= @users %></p>
+        <p>Number of rooms: <%= @rooms %></p>
+    </div>
+
+    <div class="btn-group">
+        <%= button_to "Join users", users_path, method: :get, class: "btn btn-secondary m-2" %>
+         <%= button_to "Join rooms", rooms_path, method: :get, class: "btn btn-secondary m-2"  %>
+    </div>
+</section>
