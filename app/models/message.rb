@@ -2,6 +2,7 @@ class Message < ApplicationRecord
   belongs_to :room
   belongs_to :user
 
+  validates :content, presence: :true
   before_create :confirm_participant
   
   after_create_commit { broadcast_append_to room, target: "messages" }

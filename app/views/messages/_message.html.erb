@@ -1,4 +1,4 @@
-<div id="message_<%= message.id %>" class="message_block" data-controller="message" data-user-id = "<%= message.user.id %>" data-action="turbo:frame-load->messages#messageAdded">
+<div id="message_<%= message.id %>" class="message_block" data-controller="message" data-user-id = "<%= message.user.id %>">
     <% if !message.room.is_private %>
         <p class="name"> <%= message.user.username %></p>
     <% end %>

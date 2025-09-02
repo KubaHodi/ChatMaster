@@ -7,16 +7,5 @@ export default class extends Controller {
         }else{
             this.element.classList.add("theirs")
         } // Ustawianie klasy dla wiadomości od użytkownika
-
-        this.scrollToBottom()     
     }
-
-    scrollToBottom(){
-        this.element.scrollTop = this.element.scrollHeight
-    }
-
-    messageAdded(){
-        this.scrollToBottom()
-    }
-
 }
