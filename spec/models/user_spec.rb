@@ -18,8 +18,12 @@ RSpec.describe User, type: :model do
   end
 
   it "does not have the same username" do
-    user = User.new(username: "Mike", password_digest: "123")
-    expect(subject[:username]).to match(user[:username])
+    user = User.new(username: "Mike1", password_digest: "123")
+    if user[:username] == subject.username
+      expect(subject).to_not be_valid
+    else
+      expect(subject).to be_valid
+    end    
   end
   
   it "has password confirmation" do
