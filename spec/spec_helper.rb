@@ -14,6 +14,18 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.before(:each, type: :system, js: true) do
+    if ENV("SELENIUM_DRIVER_URL").present?
+      driven_by :selenium, using: :chrome,
+        options: {
+          browser: :remote,
+          url: ENV.fetch("SELENIUM_DRIVER_URL"),
+          described_capabilities: :chrome
+        }
+    else
+      driven_by :selenium_chrome_headless
+    end
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -21,7 +33,7 @@ RSpec.configure do |config|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
     # defined using `chain`, e.g.:
-    #     be_bigger_than(2).and_smaller_than(4).description
+    #     be_bigger_than(2).and_smaller_than(4).
     #     # => "be bigger than 2 and smaller than 4"
     # ...rather than:
     #     # => "be bigger than 2"
