@@ -21,12 +21,12 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script>
-      window.currentUserId = <%= session[:user_id] %>;
+    <% if logged_user %>
+      window.currentUserId = <%= logged_user.id %>
+    <% end %>
     </script>
   </head>
-
   <body>
-  
     <% if logged_user %>
       <%= render "shared/navbar" %>
     <% end %>

@@ -3,11 +3,11 @@
     <div id="rooms">
         <h1 class="text-white"><%= @user&.username || @single_room.name %></h1>
     </div>
-    <div id="room_container" class="bg-dark vh-100">
+    <div id="room_container" class="bg-dark vh-100" data-controller="scroll" data-scroll-target="messages" >
         <% if @room %>
-            <div id="room">
+            <div id="room" >
                 <%= turbo_stream_from @single_room %>
-                <div id="messages" data-controller="messages">
+                <div id="messages">
                     <%= render @messages %>
                 </div>
             </div>

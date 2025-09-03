@@ -8,7 +8,19 @@ class RoomsController < ApplicationController
     end
 
     def create
-        @room = Room.create(name: params[:name])
+        @room = Room.new(room_params)
+
+        if @room.save   
+            respond_to do |format|
+                format.turbo_stream
+                format.html { redirect_to rooms_path }
+            end
+        else
+            respond_to do |format|
+                format.turbo_stream { render turbo_stream: turbo_stream.replace("room_form", partial: "layouts/new_room_form"), locals: {room: @room} }
+                format.html { render :new, status: unprocessable_entity }
+            end
+        end
     end
 
     def show
@@ -17,5 +29,11 @@ class RoomsController < ApplicationController
         @message = Message.new     
         @messages = @room.messages.order(created_at: :asc) 
         @single_room = Room.find(params[:id])     
+    end
+
+    private
+
+    def room_params
+        params.expect(room: [ :name ] )
     end
 end
