@@ -1,0 +1,19 @@
+current directory: /home/kuba2007/Documents/Rails/ChatMaster/ChatMaster/vendor/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+/usr/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /home/kuba2007/Documents/Rails/ChatMaster/ChatMaster/vendor/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250904-10821-ur19mr sitelibdir\=./.gem.20250904-10821-ur19mr clean
+
+current directory: /home/kuba2007/Documents/Rails/ChatMaster/ChatMaster/vendor/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250904-10821-ur19mr sitelibdir\=./.gem.20250904-10821-ur19mr
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/kuba2007/Documents/Rails/ChatMaster/ChatMaster/vendor/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250904-10821-ur19mr sitelibdir\=./.gem.20250904-10821-ur19mr install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250904-10821-ur19mr/erb
+
+current directory: /home/kuba2007/Documents/Rails/ChatMaster/ChatMaster/vendor/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250904-10821-ur19mr sitelibdir\=./.gem.20250904-10821-ur19mr clean
