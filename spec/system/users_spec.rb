@@ -23,4 +23,5 @@ RSpec.describe "Users", type: :system do
     visit user_path("Jerry")
     expect(page.body).to match(/Jerry/)
   end
+  it_behaves_like "navbar present"
 end

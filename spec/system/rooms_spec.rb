@@ -35,7 +35,9 @@ RSpec.describe "Rooms", type: :system do
     click_on "VC"
     fill_in "text-message", with: "Hi"
     click_on "Create Message"
-    visit room_path(room)
+    visit room_path(Room.find_by(name:["VC"]))
     expect(page.body).to have_content(/Hi/)
+    expect(page.body).to have_css(".mine")
   end
+  it_behaves_like "navbar present"
 end
