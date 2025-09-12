@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
         else
             respond_to do |format|
                 format.turbo_stream { render turbo_stream: turbo_stream.replace("room_form", partial: "layouts/new_room_form"), locals: {room: @room} }
-                format.html { render :new, status: unprocessable_entity }
+                format.html { redirect_to rooms_path }
             end
         end
     end

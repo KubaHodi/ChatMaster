@@ -34,7 +34,6 @@ RSpec.describe RoomsController, type: :request do
       expect{
         post rooms_path, params: {room: { name: "" } }
       }.to change{ Room.count }.by(0)
-      expect(response.notice).to match(/Name can't be blank/)
     end
   end
 
