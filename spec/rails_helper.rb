@@ -37,7 +37,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.include FactoryBot::Syntax::Methods
-  config.before(type: :system) do
+  config.before(:each, type: :system) do
     driven_by :selenium_chrome  
   end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

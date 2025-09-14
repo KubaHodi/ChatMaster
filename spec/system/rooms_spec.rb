@@ -39,5 +39,5 @@ RSpec.describe "Rooms", type: :system do
     expect(page.body).to have_content(/Hi/)
     expect(page.body).to have_css(".mine")
   end
-  it_behaves_like "navbar present"
+  it_behaves_like "navbar present", js: true
 end

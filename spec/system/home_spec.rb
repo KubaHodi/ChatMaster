@@ -8,5 +8,5 @@ RSpec.describe "Home", type: :system do
         expect(page).to have_content(users.count)
         expect(page).to have_content(rooms.count)
     end
-    it_behaves_like "navbar present"
+    it_behaves_like "navbar present", js: true
 end

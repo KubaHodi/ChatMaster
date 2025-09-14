@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :rooms do
-    resources :messages
+    resources :messages, only: [:create]
   end
   resources :users, only: [ :show ]
   get "search", to: "search#index"
