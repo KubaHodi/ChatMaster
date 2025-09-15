@@ -15,9 +15,18 @@
             <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-primary" %>
           <% end %>
       </ul>
-    </div>
+    </div>    
     <!-- Collapsible wrapper -->
   </div>
   <!-- Container wrapper -->
+  <div class="text-white">
+  <p>Hello! <%= logged_user.username%></p>
+    <% if logged_user.avatar.attached? %>
+      <%= link_to image_tag(url_for(logged_user.avatar), size: "150x150"), edit_user_path(logged_user), method: :get%>
+    <% else %>
+      <%= link_to image_tag("default_avatar.png", size: "150x150"), edit_user_path(logged_user), method: :get %>
+    <% end %>
+    <%= link_to "Edit user", edit_user_path(logged_user), method: :get, class: "btn btn-success" %>
+  </div>
 </nav>
 <!-- Navbar -->

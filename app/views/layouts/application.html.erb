@@ -29,6 +29,9 @@
   <body>
     <% if logged_user %>
       <%= render "shared/navbar" %>
+      <% if flash[:alert].present? %>
+        <div class="bg-dark text-success"> <%= Array(flash[:alert]).to_sentence %> </div>
+      <% end %>
     <% end %>
     <%= yield %>
   </body>
