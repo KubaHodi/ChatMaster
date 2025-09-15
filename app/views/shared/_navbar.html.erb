@@ -4,22 +4,17 @@
 
   <!-- Container wrapper -->
   <div class="container">
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="#"><i class="fab fa-linkedin fa-2x"></i></a>
     <!-- Search form -->
    <%= render "search/form" %>
-
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left links -->
+    <div>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "home", root_path, class: "nav-link d-flex flex-column text-center" %>
+          <%= link_to "Home", root_path, class: "nav-link d-flex flex-column text-center" %>
         </li>
           <% if session[:user_id].present? %>
-            <%= button_to "logout", logout_path, method: :delete, class: "btn btn-primary" %>
+            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-primary" %>
           <% end %>
-      <!-- Left links -->
+      </ul>
     </div>
     <!-- Collapsible wrapper -->
   </div>

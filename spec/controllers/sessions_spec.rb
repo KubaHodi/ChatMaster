@@ -18,4 +18,13 @@ RSpec.describe "Sessions", type: :request do
       expect(response.body).to match(/Welcome/)
     end
   end
+
+  describe "DELETE destroy" do
+    it "should delete session" do
+      delete logout_path
+      expect(response).to redirect_to(login_path)
+      follow_redirect!
+      expect(flash[:notice]).to include("Logged out")
+    end
+  end
 end
