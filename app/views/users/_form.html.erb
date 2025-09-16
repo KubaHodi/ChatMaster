@@ -1,4 +1,4 @@
-<section class="vh-max bg-dark">
+<section class="vh-100 bg-dark">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -22,9 +22,15 @@
                 <%= form.password_field :password, class: "form-control form-control-lg" %>
                 <%= form.label :password, "Password" %>
               </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <%= form.email_field :email, class: "form-control form-control-lg" %>
+                <%= form.label :email, "Email" %>
+                <p class="text-white-50 mb-5">You can omit it now. But later it's necessary to reset your password</p>
+              </div>
               
               <div data-mdb-input-init class="form-outline form-white mb-4">
-                <%= form.file_field :avatar, class: "form-control form-control-lg" %>
+                <%= form.file_field :avatar, placeholder: "You can change it later or leave it for default avatar", class: "form-control form-control-lg" %>
                 <%= form.label :avatar, "Avatar" %>
               </div>
 
