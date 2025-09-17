@@ -5,13 +5,24 @@ Rails.application.routes.draw do
   get "password_resets/update"
   get "search/index"
   root "home#index"
+
+  devise_scope :user do
+    patch '/accept_invitation', to: 'users_invitation#update'
+  end
+
+  devise_for :users, controllers: {
+    invitation: 'users_invitation/invitations',
+  },
+
+  controllers: {
+    invitations: 'users_invitation',
+  }
+
   controller :sessions do
     get "login" => :new
     post "login" => :create
     delete "logout" => :destroy
   end
-
-
   controller :users do
     get "register" => :new
     post "register" => :create
