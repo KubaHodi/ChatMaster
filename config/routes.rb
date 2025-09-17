@@ -6,18 +6,6 @@ Rails.application.routes.draw do
   get "search/index"
   root "home#index"
 
-  devise_scope :user do
-    patch '/accept_invitation', to: 'users_invitation#update'
-  end
-
-  devise_for :users, controllers: {
-    invitation: 'users_invitation/invitations',
-  },
-
-  controllers: {
-    invitations: 'users_invitation',
-  }
-
   controller :sessions do
     get "login" => :new
     post "login" => :create
@@ -29,6 +17,10 @@ Rails.application.routes.draw do
     get "/users", to: "users#index"
   end
   resources :users
+
+  resource :invitation, only: [:new, :create], controller: "invitations"
+  get '/invitations/:token', to: 'invitations#show', as: "accept_invitation"
+  patch '/invitations/:token', to: 'invitations#update', as: "update_invitation"
 
   controller :rooms do
     get "/rooms", to: "rooms#index"
