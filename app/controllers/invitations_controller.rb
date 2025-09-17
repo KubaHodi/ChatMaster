@@ -7,6 +7,7 @@ class InvitationsController < ApplicationController
     def create
         @invitation = Invitation.new(invitation_params)
         @invitation.user_id = current_user.id
+        token = @invitation.generate_token
 
         if @invitation.save
             InvitationMailer.send_invitation(@invitation).deliver_now
@@ -18,11 +19,16 @@ class InvitationsController < ApplicationController
 
     def show
         
-
     end
 
     def update
         if @invitation.update(accepted_at: Time.current)
         end
+    end
+
+    private
+    
+    def invitation_params
+        params.expect(invitation: [:invite, :token, :email])
     end
 end
