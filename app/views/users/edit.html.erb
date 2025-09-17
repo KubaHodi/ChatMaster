@@ -17,21 +17,15 @@
               </div>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
-                <%= form.password_field :password, class: "form-control form-control-lg" %>
-                <%= form.label :password, "Password" %>
+                <%= form.email_field :email, class: "form-control form-control-lg" %>
+                <%= form.label :email, "Email" %>
               </div>
               
               <div data-mdb-input-init class="form-outline form-white mb-4">
                 <%= form.file_field :avatar, class: "form-control form-control-lg" %>
                 <%= form.label :avatar, "Avatar" %>
               </div>
-
-              <div data-mdb-input-init class="form-outline form-white mb-4">
-                <%= form.password_field :password_confirmation,
-                id: :user_password_confirmation,
-                class: "form-control form-control-lg" %>
-                <%= form.label :password_confirmation, "Password confirmation" %>
-              </div>
+              
                 <%= form.submit class: "btn btn-outline-light btn-lg px-5" %>
             <% end %>
             </div>

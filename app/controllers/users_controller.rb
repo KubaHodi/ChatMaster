@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find_by(id: params[:id])
         if @user.update(user_params)
-            redirect_to login_path, alert: "Profile updated succesfully"
+            redirect_to login_path, alert: "Profile updated succesfully"    
         else
         flash[:notice] = @user.errors.full_messages.join(", ")
         render :edit, status: :unprocessable_entity
@@ -62,7 +62,6 @@ class UsersController < ApplicationController
     def user_params
         params.expect(user: [ :username, :password, :password_confirmation, :avatar, :email ] )
     end
-
     def get_name(user_1, user_2)
         users = [user_1, user_2].sort
         "private_#{users[0].id}_#{users[1].id}"
