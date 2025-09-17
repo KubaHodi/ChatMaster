@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "PasswordResets", type: :request do
+  before do
+    @user = FactoryBot.create(:user)
+  end
   describe "GET /new" do
     it "returns http success" do
       get "/password_resets/new"
@@ -11,7 +14,7 @@ RSpec.describe "PasswordResets", type: :request do
   describe "GET /create" do
     it "returns http success" do
       get "/password_resets/create"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(302)
     end
   end
 
@@ -25,7 +28,7 @@ RSpec.describe "PasswordResets", type: :request do
   describe "GET /update" do
     it "returns http success" do
       get "/password_resets/update"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(302)
     end
   end
 

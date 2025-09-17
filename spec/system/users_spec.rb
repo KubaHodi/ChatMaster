@@ -1,5 +1,5 @@
 RSpec.describe "Users", type: :system do 
-  let!(:user) { User.create!(username: "Dave", password: "123") }
+  let!(:user) { FactoryBot.create(:user) }
 
   before do
     User.create!(username: "Jerry", password: "123")

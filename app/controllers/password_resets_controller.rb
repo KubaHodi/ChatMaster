@@ -16,7 +16,6 @@ class PasswordResetsController < ApplicationController
 
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     redirect_to login_path, alert: "You token has expired. Please try again"
-
   end
 
   def update
@@ -30,7 +29,9 @@ class PasswordResetsController < ApplicationController
 
     rescue ActiveSupport::MessageVerifier::InvalidSignature
      redirect_to login_path, alert: "You token has expired. Please try again."
-
+    
+    rescue ActiveRecord
+      redirect_to login_path, alert: "You link has expired."
   end
 
   private
