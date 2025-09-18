@@ -15,6 +15,17 @@ class User < ApplicationRecord
     %w[ username ]
   end
 
+  def friends
+    outgoing =
+    User.joins(memberships: :invitation)
+        .where(invitations: { user_id: id }).pluck(:id)
+
+    incoming =
+    User.joins(invitations: :memberships)
+        .where(memberships: { user_id: id }).pluck(:id)
+        
+    User.where(id: (outgoing + incoming).uniq)
+  end
   private
   def add_default_avatar
     return if avatar.attached?

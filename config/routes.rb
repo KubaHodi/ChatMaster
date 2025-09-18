@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     post "register" => :create
     get "/users", to: "users#index"
   end
-  resources :users
+  resources :users do
+    get :friends, on: :collection
+  end
 
   controller :invitations do
     get "invite" => :new

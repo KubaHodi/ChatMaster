@@ -1,0 +1,8 @@
+<h1>Your friends</h1>
+<%if @friends.any? %>
+    <% @friends.each do |friend| %>
+    <p><%=friend.username%></p>
+    <% end %>
+<% else %>
+
+<% end %>

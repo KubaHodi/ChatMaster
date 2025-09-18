@@ -9,12 +9,20 @@ class MembershipsController < ApplicationController
 
   def create
     invitation = Invitation.find(params[:invitation_id])
-    membership = (logged_user.memberships.build(invitation: invitation))
+    id = invitation.user_id
 
-    if membership.save
-      redirect_to users_path
+    membership = Membership.find_or_initialize_by(
+      user_id: logged_user.id,
+      invitation_id: id
+    )
+    if logged_user.id == id
+      redirect_to root_path, alert: "You can't accept your own invitation!"
     else
-      redirect_to root_path
+      if membership.save
+        redirect_to users_path
+      else
+        redirect_to root_path
+      end
     end
   end
 

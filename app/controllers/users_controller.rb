@@ -53,6 +53,10 @@ class UsersController < ApplicationController
         render :edit, status: :unprocessable_entity
         end
     end
+
+    def friends
+        @friends = logged_user.friends
+    end
     private
 
     def set_user
