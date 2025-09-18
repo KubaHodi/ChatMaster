@@ -1,7 +1,11 @@
 <h1>Your friends</h1>
 <%if @friends.any? %>
     <% @friends.each do |friend| %>
+    <div class="bg-dark d-block text-white">
+    <%= image_tag url_for(friend.avatar), size: "100x100" %>
     <p><%=friend.username%></p>
+    <%= button_to "#{friend.username}"  %>
+    </div>
     <% end %>
 <% else %>
 
