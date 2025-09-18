@@ -27,4 +27,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_friends
+    
+  end
 end

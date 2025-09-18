@@ -4,7 +4,7 @@
     <div class="bg-dark d-block text-white">
     <%= image_tag url_for(friend.avatar), size: "100x100" %>
     <p><%=friend.username%></p>
-    <%= button_to "#{friend.username}"  %>
+    <%= link_to "#{friend.username}", @friend, class: "btn btn-primary"  %>
     </div>
     <% end %>
 <% else %>

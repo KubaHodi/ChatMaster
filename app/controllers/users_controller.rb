@@ -56,6 +56,7 @@ class UsersController < ApplicationController
 
     def friends
         @friends = logged_user.friends
+        @friend = User.find_by(params[:id])
     end
     private
 
