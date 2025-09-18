@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :messages
+  has_many :memberships
+  has_many :invitations
   has_one_attached :avatar
 
   after_create_commit { broadcast_append_to "users" } #Po utworzeniu użytkownika przesyłamy partial _user i dołączamy go do diva gdzie są wyświetlani użytkownicy id="users" oraz używamy turbo_stream from "users" aby odebrać ten przesył

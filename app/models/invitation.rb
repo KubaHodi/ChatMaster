@@ -3,7 +3,7 @@ class Invitation < ApplicationRecord
     validates :token, presence: true, uniqueness: true
 
     belongs_to :user
-
+    has_many :memberships
     before_create :generate_token
 
     def generate_token

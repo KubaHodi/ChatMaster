@@ -8,6 +8,7 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new(invitation_params)
         @invitation.user = logged_user
         @invitation.token = @invitation.generate_token
+        session[:user_id] = logged_user
         if @invitation.save
             InvitationMailer.send_invitation(@invitation).deliver_now
             redirect_to root_path, alert: "Invitation had been sent"

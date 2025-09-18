@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "memberships/new"
+  get "memberships/show"
+  get "memberships/create"
+  get "memberships/delete"
   get "password_resets/new"
   get "password_resets/create"
   get "password_resets/edit"
@@ -25,7 +29,10 @@ Rails.application.routes.draw do
     patch '/invitations/:token', to: 'invitations#update', as: "update_invitation"
   end
 
-  
+  controller :memberships do
+    get "membership" => :new
+    post "membership" => :create
+  end
 
   controller :rooms do
     get "/rooms", to: "rooms#index"

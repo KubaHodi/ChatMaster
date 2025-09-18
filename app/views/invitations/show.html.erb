@@ -2,7 +2,9 @@
     <div class="container text-white">
         <%= image_tag url_for(@invitation.user.avatar) %>
         <h1> <%= @invitation.user.username%> has just invited you <h1>
-        <%= button_to "Accept", model, class: "btn btn-success" %>
-        <%= button_to "Decline", model, class: "btn btn-danger" %>
+        <%= button_to "Accept", membership_path, method: :post, class: "btn btn-success" %>
+        <%= button_to "Decline", membership_path, class: "btn btn-danger" %>
+        <p> <%= @invitation.memberships %> </p>
     </div>
+        
 </section>
