@@ -1,13 +1,10 @@
 class Invitation < ApplicationRecord
-    belongs_to :user
-    belongs_to :invite, class_name: "User", optional: true
-
-    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates :email, presence: true
     validates :token, presence: true, uniqueness: true
 
+    belongs_to :user
+
     before_create :generate_token
-    
-    private
 
     def generate_token
         self.token = SecureRandom.urlsafe_base64(16)

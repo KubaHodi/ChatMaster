@@ -6,14 +6,13 @@ class InvitationsController < ApplicationController
 
     def create
         @invitation = Invitation.new(invitation_params)
-        @invitation.user_id = current_user.id
-        token = @invitation.generate_token
-
+        @invitation.user = logged_user
+        @invitation.token = @invitation.generate_token
         if @invitation.save
             InvitationMailer.send_invitation(@invitation).deliver_now
-            redirect_to root_path, notice: "Invitation had been sent"
+            redirect_to root_path, alert: "Invitation had been sent"
         else
-            render :new
+            render :new, status: 422
         end
     end
 
@@ -29,6 +28,6 @@ class InvitationsController < ApplicationController
     private
     
     def invitation_params
-        params.expect(invitation: [:invite, :token, :email])
+        params.expect(invitation: [:email, :user, :token])
     end
 end

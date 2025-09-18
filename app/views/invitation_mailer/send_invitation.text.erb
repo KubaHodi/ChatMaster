@@ -1,0 +1,4 @@
+<%= image_tag "logo.png", alt: "ChatMaster logo" %>
+<h1><%= @invitation.user.username %> Has just invited you as a friend</h1>
+<%= image_tag url_for(@invitation.user.avatar), alt: "#{@invitation.user.username} profile picture" %>
+<p>ChatMaster app<p>
