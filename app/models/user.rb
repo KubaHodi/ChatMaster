@@ -3,7 +3,6 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :email, uniqueness: true
   scope :all_except, ->(user) { where.not(id: user) } #zakres umożliwiający pobranie wszystkich użytkowników z wyjątkiem samego siebie
-
   has_secure_password
   has_many :messages
   has_many :memberships

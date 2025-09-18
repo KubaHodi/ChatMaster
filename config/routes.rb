@@ -28,10 +28,9 @@ Rails.application.routes.draw do
     get '/invitations/:token', to: 'invitations#show', as: "accept_invitation"
     patch '/invitations/:token', to: 'invitations#update', as: "update_invitation"
   end
-
-  controller :memberships do
-    get "membership" => :new
-    post "membership" => :create
+  
+  resources :invitations do
+    resources :memberships, only: :create
   end
 
   controller :rooms do
