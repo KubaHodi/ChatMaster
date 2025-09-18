@@ -1,0 +1,8 @@
+<section class="bg-dark vh-100">
+    <div class="container text-white">
+        <%= image_tag url_for(@invitation.user.avatar) %>
+        <h1> <%= @invitation.user.username%> has just invited you <h1>
+        <%= button_to "Accept", model, class: "btn btn-success" %>
+        <%= button_to "Decline", model, class: "btn btn-danger" %>
+    </div>
+</section>

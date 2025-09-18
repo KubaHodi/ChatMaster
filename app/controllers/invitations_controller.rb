@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-    before_action :find_invitation, only: %w[ show update ]
+    skip_before_action :authorize, only: %w[ show ]
     def new
         @invitation = Invitation.new
     end
@@ -17,12 +17,10 @@ class InvitationsController < ApplicationController
     end
 
     def show
-        
+        @invitation = Invitation.find_by(token: params[:token])
     end
 
     def update
-        if @invitation.update(accepted_at: Time.current)
-        end
     end
 
     private
