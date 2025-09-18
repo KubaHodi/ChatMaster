@@ -117,6 +117,8 @@ GEM
     factory_bot_rails (6.5.0)
       factory_bot (~> 6.5)
       railties (>= 6.1.0)
+    foreman (0.90.0)
+      thor (~> 1.4)
     fugit (1.11.2)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -395,6 +397,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   factory_bot_rails
+  foreman
   importmap-rails
   jbuilder
   kamal

@@ -14,14 +14,13 @@ RSpec.describe User, type: :model do
   end
 
   it "is invalid if the username is already taken" do
-    create(:user, username: "Mike")
-    subject.username = "Mike"
+    create(:user, username: subject.username)
     expect(subject).not_to be_valid
   end
   
   it "is valid if the username is unique" do
-    create(:user, username: "Mike_2")
-    subject.username = "Mike"
+    create(:user, username: "Jerry")
+    subject.username = subject.username
     expect(subject).to be_valid
   
   end

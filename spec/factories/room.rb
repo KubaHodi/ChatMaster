@@ -1,6 +1,6 @@
 FactoryBot.define do
     factory :room do
-        sequence(:name) { |n| "Music_#{n}"}
+        name { "Music_#{SecureRandom.hex(3)}" }
         is_private { false }
     end
 end

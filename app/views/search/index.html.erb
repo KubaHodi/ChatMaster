@@ -6,7 +6,7 @@
       <% @user_from_search.each do |user_from_search| %>
       <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%= user_from_search.username %></h5>
+            <h5 class="card-title"><%= link_to "#{user_from_search.username}", user_from_search %></h5>
           </div>
       </div>
       <% end %>

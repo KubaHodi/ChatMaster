@@ -1,0 +1,5 @@
+<%= @invitation.user.username %> Has just invited you as a friend
+================================================================
+follow this link to accept <%= accept_invitation_url(token: @invitation.token) %>
+Don't have account? click here to register <%= register_url %>
+ChatMaster app

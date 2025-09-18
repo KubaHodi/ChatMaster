@@ -1,7 +1,7 @@
 <section class="bg-dark p-2">
     <%= turbo_stream_from "rooms" %>
     <div id="rooms">
-        <h1 class="text-white"><%= @user&.username || @single_room.name %></h1>
+        <h1 class="text-white"><%= @user&.username || @single_room.name %></h1>    
     </div>
     <div id="room_container" class="bg-dark vh-100" data-controller="scroll" data-scroll-target="messages" >
         <% if @room %>

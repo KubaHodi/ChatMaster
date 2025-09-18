@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: %w[ new create ]
+    before_action :set_user, only: %w[ edit update show ]
     def index
         @users = User.all
     end
@@ -39,16 +40,32 @@ class UsersController < ApplicationController
         end
     end
 
+    def edit
+        
+    end
+
+    def update
+        @user = User.find_by(id: params[:id])
+        if @user.update(user_params)
+            redirect_to login_path, alert: "Profile updated succesfully"    
+        else
+        flash[:notice] = @user.errors.full_messages.join(", ")
+        render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def friends
+        @friends = logged_user.friends
+    end
     private
 
     def set_user
-        @user = User.find(params.expect[:id])
+        @user = User.find(params[:id])
     end
 
     def user_params
-        params.expect(user: [ :username, :password, :password_confirmation, :avatar ] )
+        params.expect(user: [ :username, :password, :password_confirmation, :avatar, :email ] )
     end
-
     def get_name(user_1, user_2)
         users = [user_1, user_2].sort
         "private_#{users[0].id}_#{users[1].id}"

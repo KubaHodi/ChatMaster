@@ -1,4 +1,7 @@
 <section class="vh-100 bg-dark">
+    <% if notice.present? %>
+        <p><%=notice%></p>
+    <% end %>
     <%= turbo_stream_from "users" %>
     <div id="users">
         <%= render @users %>
