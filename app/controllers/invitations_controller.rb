@@ -1,5 +1,4 @@
 class InvitationsController < ApplicationController
-    skip_before_action :authorize, only: %w[ show ]
     def new
         @invitation = Invitation.new
     end

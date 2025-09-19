@@ -1,4 +1,4 @@
-<div id="message_<%= message.id %>" class="message_block" data-controller="message" data-user-id = "<%= message.user.id %>">
+<div id="message_<%= message.id %>" class="message_block d-flex flex-row justify-content-start " data-controller="message" data-user-id = "<%= message.user.id %>">
     <div class="messageAvatar">
         <% if message.user.avatar.attached? %>
             <%= image_tag url_for(message.user.avatar), size: "50x50", class: "img-circle" %>
