@@ -6,8 +6,14 @@
             <%= image_tag "default_avatar.png", size: "50x50" %>
         <% end %>
     </div>
+    <div class="d-flex flex-column">
     <% if !message.room.is_private %>
-        <p class="name"> <%= message.user.username %></p>
+        <% if message.user == logged_user %>
+        <div class="name_current_user">You</div></br>
+        <% else %>
+        <div class="name"> <%= message.user.username %></div></br>
+        <% end %>
     <% end %>
     <%= message.content %>
+    </div>
 </div>

@@ -23,19 +23,17 @@
 #room_container{
   padding: 5px;
   color: white;
-  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .message_block{
   margin: 2%;
-  max-width: 65%;
+  max-width: 60%;
   padding: 1%;
   clear: both;
-  border-radius: 1rem;
-  word-break: break-word;
-  box-shadow: 8px 8px 8px black;
+  border-radius: 10px;
+  word-break: break-all;
 }
 
 .theirs{

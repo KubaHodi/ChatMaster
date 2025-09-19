@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: %w[ new create ]
     before_action :set_user, only: %w[ edit update show ]
-    before_action :authorize_friendship, only: %w[ show ]
-    before_action :authorize_self, only: %w[ edit update ]
+    before_action :authorize_friendship, only: %w[ show edit update ]
     def index
         @users = User.all
     end
@@ -57,7 +56,7 @@ class UsersController < ApplicationController
 
     def friends
         @friends = logged_user.friends
-        @friend = @friends.find_by(params[:id])
+        @friend = @friends.find_by(id: params[:user_id])
     end
     private
 
@@ -79,13 +78,12 @@ class UsersController < ApplicationController
     end
 
     def authorize_friendship
-        return if @user == logged_user
+        if @user == logged_user
+            redirect_to root_path, alert: "You can't chat with yourself." and return
+        end
+
         return if logged_user.friends.exists?(@user.id)
-
-        redirect_to root_path, alert: "You are not friends"
+        redirect_to root_path, alert: "You are not friends."
     end
 
-    def authorize_self
-        redirect_to root_path, alert: "You can't do that" unless @user == logged_user
-    end
 end
