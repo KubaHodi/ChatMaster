@@ -9,7 +9,7 @@ class InvitationsController < ApplicationController
         @invitation.user = logged_user
         @invitation.token = @invitation.generate_token
         if @invitation.save
-            InvitationMailer.send_invitation(@invitation).deliver_now
+            InvitationMailer.send_invitation(@invitation).deliver_later
             redirect_to root_path, alert: "Invitation had been sent"
         else
             render :new, status: 422
