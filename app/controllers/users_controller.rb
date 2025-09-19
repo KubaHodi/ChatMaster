@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: %w[ new create ]
     before_action :set_user, only: %w[ edit update show ]
+    before_action :authorize_friendship, only: %w[ show ]
+    before_action :authorize_self, only: %w[ edit update ]
     def index
         @users = User.all
     end
@@ -40,8 +42,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def edit
-        
+    def edit      
     end
 
     def update
@@ -67,8 +68,20 @@ class UsersController < ApplicationController
     def user_params
         params.expect(user: [ :username, :password, :password_confirmation, :avatar, :email ] )
     end
+
     def get_name(user_1, user_2)
         users = [user_1, user_2].sort
         "private_#{users[0].id}_#{users[1].id}"
+    end
+
+    def authorize_friendship
+        return if @user == logged_user
+        return if logged_user.friends.exists?(@user.id)
+
+        redirect_to root_path, alert: "You are not friends"
+    end
+
+    def authorize_self
+        redirect_to root_path, alert: "You can't do that" unless @user == logged_user
     end
 end
