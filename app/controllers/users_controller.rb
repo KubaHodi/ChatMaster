@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: %w[ new create ]
     before_action :set_user, only: %w[ edit update show ]
-    before_action :authorize_friendship, only: %w[ show edit ]
     before_action :check_user, only: %w[ show ]
+    before_action :authorize_friendship, only: %w[ show ]
     before_action :deny_entrance, only: %w[ edit update ]
     def index
         @users = User.all
@@ -79,15 +79,15 @@ class UsersController < ApplicationController
         "private_#{users[0].id}_#{users[1].id}"
     end
 
-    def authorize_friendship    
-        return if logged_user.friends.exists?(@user.id)
-        redirect_to root_path, alert: "You are not friends."
-    end
-
-    def check_user
+     def check_user
         if @user == logged_user
            redirect_to root_path, alert: "You can't chat with yourself." and return
         end
+    end
+
+    def authorize_friendship    
+        return if logged_user.friends.exists?(@user.id)
+        redirect_to root_path, alert: "You are not friends."
     end
 
     def deny_entrance
