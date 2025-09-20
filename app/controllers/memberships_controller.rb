@@ -18,6 +18,7 @@ class MembershipsController < ApplicationController
     )
       if membership.save
         redirect_to users_path
+        invitation.accepted!
       else
         Rails.logger.error membership.errors.full_messages.to_sentence
       end

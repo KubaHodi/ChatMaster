@@ -19,6 +19,10 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.find_by(token: params[:token])
     end
 
+    def index
+        @invitations = Invitation.where(status: 0, username: logged_user.username)
+    end
+
     def update
     end
 
