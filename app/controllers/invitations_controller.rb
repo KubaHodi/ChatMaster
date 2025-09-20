@@ -25,6 +25,6 @@ class InvitationsController < ApplicationController
     private
     
     def invitation_params
-        params.expect(invitation: [:email, :user, :token])
+        params.expect(invitation: [:username, :user, :token])
     end
 end
