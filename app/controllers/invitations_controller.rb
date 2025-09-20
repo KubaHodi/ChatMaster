@@ -7,11 +7,16 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new(invitation_params)
         @invitation.user = logged_user
         @invitation.token = @invitation.generate_token
-        if @invitation.save
-            InvitationMailer.send_invitation(@invitation).deliver_later
-            redirect_to root_path, alert: "Invitation had been sent"
+        user = User.find_by(username: @invitation.username)
+        if user.id != logged_user.id
+            if @invitation.save
+                InvitationMailer.send_invitation(@invitation).deliver_later
+                redirect_to root_path, alert: "Invitation had been sent"
+            else
+                render :new, status: 422
+            end
         else
-            render :new, status: 422
+            redirect_to root_path, alert: "You can't invite yourself"
         end
     end
 
