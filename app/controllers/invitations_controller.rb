@@ -36,4 +36,5 @@ class InvitationsController < ApplicationController
     def invitation_params
         params.expect(invitation: [:username, :user, :token])
     end
+
 end
