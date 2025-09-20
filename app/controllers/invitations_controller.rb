@@ -21,9 +21,14 @@ class InvitationsController < ApplicationController
 
     def index
         @invitations = Invitation.where(status: 0, username: logged_user.username)
+        @users_ids = @invitations.pluck(:user_id)
+        @users = User.find(@users_ids)
     end
 
     def update
+    end
+
+    def delete
     end
 
     private
