@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   controller :invitations do
     get "invite" => :new
     post "invite" => :create
+    get "invitations" => :index
     get '/invitations/:token', to: 'invitations#show', as: "accept_invitation"
     patch '/invitations/:token', to: 'invitations#update', as: "update_invitation"
   end

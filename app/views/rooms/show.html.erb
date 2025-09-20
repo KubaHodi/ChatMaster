@@ -1,4 +1,4 @@
-<section class="bg-dark p-2">
+<section class="container py-5">
     <%= turbo_stream_from "rooms" %>
     <div id="rooms">
         <h1 class="text-white"><%= @user&.username || @single_room.name %></h1>    

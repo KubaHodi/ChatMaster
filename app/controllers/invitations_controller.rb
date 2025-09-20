@@ -1,5 +1,4 @@
 class InvitationsController < ApplicationController
-    skip_before_action :authorize, only: %w[ show ]
     def new
         @invitation = Invitation.new
     end
@@ -8,11 +7,16 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new(invitation_params)
         @invitation.user = logged_user
         @invitation.token = @invitation.generate_token
-        if @invitation.save
-            InvitationMailer.send_invitation(@invitation).deliver_now
-            redirect_to root_path, alert: "Invitation had been sent"
+        user = User.find_by(username: @invitation.username)
+        if user.id != logged_user.id
+            if @invitation.save
+                InvitationMailer.send_invitation(@invitation).deliver_later
+                redirect_to root_path, alert: "Invitation had been sent"
+            else
+                render :new, status: 422
+            end
         else
-            render :new, status: 422
+            redirect_to root_path, alert: "You can't invite yourself"
         end
     end
 
@@ -20,12 +24,22 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.find_by(token: params[:token])
     end
 
+    def index
+        @invitations = Invitation.where(status: 0, username: logged_user.username)
+        @users_ids = @invitations.pluck(:user_id)
+        @users = User.find(@users_ids)
+    end
+
     def update
+    end
+
+    def delete
     end
 
     private
     
     def invitation_params
-        params.expect(invitation: [:email, :user, :token])
+        params.expect(invitation: [:username, :user, :token])
     end
+
 end

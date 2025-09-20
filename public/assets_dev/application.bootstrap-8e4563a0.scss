@@ -1,0 +1,60 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+.logo{
+  width: 125px;
+}
+
+.name{
+  font-size: larger;
+  font-weight: bold;
+  color: $gray-300;
+}
+
+.name_current_user{
+  font-size: larger;
+  font-weight: bold;
+  color: $gray-300;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+#room_container{
+  color: white;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.message_block{
+  margin: 2%;
+  max-width: 65%;
+  clear: both;
+  border-radius: 1rem;
+  word-break: break-word;
+  box-shadow: 2px 2px 2px black;
+}
+
+.theirs{
+  background-color: $primary;
+  float: left;
+}
+
+.mine{
+  background-color: $secondary;
+  float: right;
+}
+
+#navbarSupportedContent{
+  position: relative;
+}
+
+#searchForm{
+  width: 40vb;
+  float: left;
+}
+
+.img-circle{
+  border-radius: 50%;
+}

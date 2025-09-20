@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: %w[ new create ]
     before_action :set_user, only: %w[ edit update show ]
+    before_action :check_user, only: %w[ show ]
+    before_action :authorize_friendship, only: %w[ show ]
+    before_action :deny_entrance, only: %w[ edit update ]
     def index
         @users = User.all
     end
@@ -41,12 +44,11 @@ class UsersController < ApplicationController
     end
 
     def edit
-        
     end
 
     def update
         @user = User.find_by(id: params[:id])
-        if @user.update(user_params)
+        if @user.update(edit_user_params)
             redirect_to login_path, alert: "Profile updated succesfully"    
         else
         flash[:notice] = @user.errors.full_messages.join(", ")
@@ -56,6 +58,7 @@ class UsersController < ApplicationController
 
     def friends
         @friends = logged_user.friends
+        @friend = @friends.find_by(id: params[:user_id])
     end
     private
 
@@ -66,8 +69,30 @@ class UsersController < ApplicationController
     def user_params
         params.expect(user: [ :username, :password, :password_confirmation, :avatar, :email ] )
     end
+
+    def edit_user_params
+        params.expect(user: [ :username, :avatar ] )
+    end
+
     def get_name(user_1, user_2)
         users = [user_1, user_2].sort
         "private_#{users[0].id}_#{users[1].id}"
+    end
+
+     def check_user
+        if @user == logged_user
+           redirect_to root_path, alert: "You can't chat with yourself." and return
+        end
+    end
+
+    def authorize_friendship    
+        return if logged_user.friends.exists?(@user.id)
+        redirect_to root_path, alert: "You are not friends."
+    end
+
+    def deny_entrance
+        unless @user == logged_user
+            redirect_to root_path, alert: "You are not allowed to do that"
+        end
     end
 end

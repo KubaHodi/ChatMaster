@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_18_085633) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_20_093400) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,9 +42,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_18_085633) do
   create_table "invitations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.string "token"
     t.integer "user_id", null: false
+    t.string "username"
+    t.integer "status", default: 0, null: false
+    t.integer "recipent_id"
+    t.datetime "expires_at"
+    t.index ["recipent_id"], name: "index_invitations_on_recipent_id"
+    t.index ["status"], name: "index_invitations_on_status"
     t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
@@ -94,6 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_18_085633) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "invitations", "users"
+  add_foreign_key "invitations", "users", column: "recipent_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "rooms"

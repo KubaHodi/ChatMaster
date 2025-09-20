@@ -24,22 +24,22 @@
               </div>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
+                <%= form.password_field :password_confirmation,
+                id: :user_password_confirmation,
+                class: "form-control form-control-lg" %>
+                <%= form.label :password_confirmation, "Password confirmation" %>
+              </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
                 <%= form.email_field :email, class: "form-control form-control-lg" %>
                 <%= form.label :email, "Email" %>
-                <p class="text-white-50 mb-5">You can omit it now. But later it's necessary to reset your password</p>
               </div>
               
               <div data-mdb-input-init class="form-outline form-white mb-4">
                 <%= form.file_field :avatar, placeholder: "You can change it later or leave it for default avatar", class: "form-control form-control-lg" %>
                 <%= form.label :avatar, "Avatar" %>
               </div>
-
-              <div data-mdb-input-init class="form-outline form-white mb-4">
-                <%= form.password_field :password_confirmation,
-                id: :user_password_confirmation,
-                class: "form-control form-control-lg" %>
-                <%= form.label :password_confirmation, "Password confirmation" %>
-              </div>
+                       
                 <%= form.submit class: "btn btn-outline-light btn-lg px-5" %>
             <% end %>
             </div>

@@ -1,0 +1,8 @@
+<section class="bg-dark 100vh text-white">
+    <% @invitations.each do |invitation| %>
+        <div>
+            <%= invitation.user.username %>
+            <%= link_to "Accept", accept_invitation_url(token: invitation.token) %>
+        </div>
+    <% end %>
+</section>

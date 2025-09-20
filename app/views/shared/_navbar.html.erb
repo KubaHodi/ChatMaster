@@ -19,6 +19,7 @@
     <!-- Collapsible wrapper -->
   </div>
   <!-- Container wrapper -->
+
   <div class="text-white">
   <p>Hello! <%= logged_user.username%></p>
     <% if logged_user.avatar.attached? %>
@@ -28,6 +29,6 @@
     <% end %>
     <%= link_to "Edit user", edit_user_path(logged_user), method: :get, class: "btn btn-success" %>
     <%= link_to "Invite", invite_path, method: :get, class: "btn btn-info" %>
+    <%= link_to "Invitations", invitations_path, method: :get %>
   </div>
 </nav>
-<!-- Navbar -->
