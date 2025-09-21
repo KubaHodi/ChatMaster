@@ -36,7 +36,4 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
-#ignore assets for development
-/public/assets_dev
-
 /node_modules
