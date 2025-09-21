@@ -1,8 +1,13 @@
 <%= render "form", invitation: @invitation %>
-<% if @invitation.errors.any? %>
-    <ul>
-    <% @invitation.errors.full_messages.each do |m| %>
-        <li> <%= m%> </li>
+<div>
+    <% if notice.present? %>
+        <p class="text-danger"><%= notice %></p>
     <% end %>
-    </ul>
-<% end %>
+    <% if @invitation.errors.any? %>
+         <ul class="text-danger">
+            <% @invitation.errors.full_messages.each do |m| %>
+                <li> <%= m%> </li>
+            <% end %>
+        </ul>
+    <% end %>
+</div>
