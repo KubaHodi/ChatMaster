@@ -17,8 +17,8 @@ class MembershipsController < ApplicationController
       user: logged_user
     )
       if membership.save
-        redirect_to friends_users_path
-        invitation.accepted!
+        invitation.update!(status: 1)
+        redirect_to friends_users_path, alert: "You are friends now!"
       else
         Rails.logger.error membership.errors.full_messages.to_sentence
       end

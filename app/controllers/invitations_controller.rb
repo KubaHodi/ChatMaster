@@ -5,20 +5,21 @@ class InvitationsController < ApplicationController
     end
 
     def create
-        @invitation = Invitation.new(invitation_params)
-        @invitation.user = logged_user
+        target_user = User.find_by(
+            username: params[:invitation][:username]
+        )
+        @invitation = Invitation.new(
+            user: logged_user,
+            friend: target_user,
+            status: 0
+        )
         @invitation.token = @invitation.generate_token
-        user = User.find_by(username: @invitation.username)
-        if user.id != logged_user.id
             if @invitation.save
                 InvitationMailer.send_invitation(@invitation).deliver_later
                 redirect_to root_path, alert: "Invitation had been sent"
             else
                 render :new, status: 422
             end
-        else
-            redirect_to root_path, alert: "You can't invite yourself"
-        end
     end
 
     def show
@@ -40,7 +41,7 @@ class InvitationsController < ApplicationController
     private
     
     def invitation_params
-        params.expect(invitation: [:username, :user, :token])
+        params.require(:invitation).permit(:username, :friend_id, :token, :user)
     end
 
     def normalize_user_invites
@@ -51,7 +52,19 @@ class InvitationsController < ApplicationController
 
         if Invitation.exists?(
             user_id: logged_user.id,
-            username: target_username,
+            friend_id: target_user.id,
+            status: 1
+        ) || 
+        Invitation.exists?(
+            user_id: target_user.id,
+            friend_id: logged_user.id,
+            status: 1
+        )
+        redirect_to(root_path, alert: "You are already friends") and return
+        end
+        if Invitation.exists?(
+            user_id: logged_user.id,
+            friend_id: target_user.id,
             status: 0
         )
             redirect_to(root_path, alert: "You already invited this user") and return
@@ -59,7 +72,7 @@ class InvitationsController < ApplicationController
 
         if Invitation.exists?(
             user_id: target_user&.id,
-            username: logged_user.username,
+            friend_id: logged_user.id,
             status: 0
             
         )
