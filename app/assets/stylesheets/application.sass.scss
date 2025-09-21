@@ -1,6 +1,5 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
-
+// Entry point for your Sass build
+@import "bootstrap/scss/bootstrap";
 .logo{
   width: 125px;
 }
@@ -35,7 +34,7 @@
   clear: both;
   border-radius: 1rem;
   word-break: break-word;
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 8px 8px 8px black;
 }
 
 .theirs{

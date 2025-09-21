@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_20_093400) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_21_131908) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_093400) do
     t.integer "status", default: 0, null: false
     t.integer "recipent_id"
     t.datetime "expires_at"
+    t.integer "friend_id"
     t.index ["recipent_id"], name: "index_invitations_on_recipent_id"
     t.index ["status"], name: "index_invitations_on_status"
     t.index ["user_id"], name: "index_invitations_on_user_id"
