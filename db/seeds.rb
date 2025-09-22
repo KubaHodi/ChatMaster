@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Membership.destroy_all
+Invitation.destroy_all
+Room.destroy_all
+User.destroy_all

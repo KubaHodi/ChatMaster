@@ -29,8 +29,13 @@ class InvitationsController < ApplicationController
             )
             @invitation.mode = :by_link
             @invitation.token = @invitation.generate_token
-            if @invitation.save
-                redirect_to root_path, alert: "Your link: http://localhost:3000/invitations/#{@invitation.token}"
+            link = Invitation.where(user_id: logged_user.id)
+            if link.count >= 1
+                redirect_to root_path, alert: "You already have your unique token!"
+            else
+                if @invitation.save
+                    redirect_to invite_path, alert: "Your link: http://localhost:3000/invitations/#{@invitation.token}"
+                end
             end
         end
     end
@@ -64,7 +69,7 @@ class InvitationsController < ApplicationController
         target_user = User.find_by(username: target_username)
 
         if target_user == logged_user
-            redirect_to root_path
+            redirect_to invite_path, alert: "You can't invite yourself"
         end
 
         if !target_user.nil?
