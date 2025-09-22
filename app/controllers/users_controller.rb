@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     before_action :check_user, only: %w[ show ]
     before_action :authorize_friendship, only: %w[ show ]
     before_action :deny_entrance, only: %w[ edit update ]
+    before_action :check_logged_user, only: %w[ new ]
     def index
         @users = User.all
     end
@@ -93,6 +94,12 @@ class UsersController < ApplicationController
     def deny_entrance
         unless @user == logged_user
             redirect_to root_path, alert: "You are not allowed to do that"
+        end
+    end
+
+    def check_logged_user
+        if logged_user.present?
+            redirect_to root_path, alert: "You are already logged in"
         end
     end
 end

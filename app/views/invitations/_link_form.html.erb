@@ -1,0 +1,9 @@
+<div class="text-white container">
+    <div class="bg-dark">
+        <h1>Invite by link</h1>
+        <%= form_with model: @invitation_link, url: invite_link_path, method: :post, local: true do |f| %>
+
+            <%= f.submit %>
+        <% end %>
+    </div>
+</div>

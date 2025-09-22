@@ -1,6 +1,11 @@
-<%= form_with model: @invitation, url: invite_path, method: :post, local: true do |f| %>
-    <%= f.text_field :username %>
-    <%= f.label :username %>   
+<div class="text-white container">
+    <div class="bg-dark">
+        <h1>Invite by username</h1>
+        <%= form_with model: @invitation, url: invite_path, method: :post, local: true do |f| %>
+            <%= f.text_field :username %>
+            <%= f.label :username %>   
 
-    <%= f.submit %>
-<% end %>
+            <%= f.submit %>
+        <% end %>
+    </div>
+</div>
