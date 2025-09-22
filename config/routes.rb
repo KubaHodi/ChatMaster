@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "secure_info/index"
   get "memberships/new"
   get "memberships/show"
   get "memberships/create"
