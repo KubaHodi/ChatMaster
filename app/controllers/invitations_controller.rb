@@ -83,14 +83,14 @@ class InvitationsController < ApplicationController
                 friend_id: logged_user.id,
                 status: 1
             )
-            redirect_to(root_path, alert: "You are already friends") and return
+            redirect_to(invite_path, alert: "You are already friends") and return
             end
             if Invitation.exists?(
                 user_id: logged_user.id,
                 friend_id: target_user.id,
                 status: 0
             )
-                redirect_to(root_path, alert: "You already invited this user") and return
+                redirect_to(invite_path, alert: "You already invited this user") and return
             end
 
             if Invitation.exists?(
@@ -99,7 +99,7 @@ class InvitationsController < ApplicationController
                 status: 0
                 
             )
-                redirect_to(root_path, alert: "You have pending friend request from this user") and return
+                redirect_to(invite_path, alert: "You have pending friend request from this user") and return
             end
         else 
         redirect_to invite_path, notice: "This username does not exist"
