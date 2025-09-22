@@ -10,8 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_user
-    if session[:user_id]
-      @logged_user = User.find(session[:user_id])
+    if session[:user_id] && User.any?
+      begin
+        @logged_user = User.find(session[:user_id])
+      rescue ActiveRecord::RecordNotFound => e
+        @logged_user = nil
+      end
     end
   end
 

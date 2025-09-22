@@ -1,9 +1,11 @@
 <section class="bg-dark vh-100 text-white">
-    <% if @invitation.token.present? %>
-      <p>Your link for friend invitation:</p>
-        <%= "http://#{request.host}:#{request.port}/invitations/#{@invitation.token}" %>
+    <% if @invitation.present? %>
+        <% if @invitation.username.blank?%>
+            <p>Your link for friends invitations:</p>
+            <%= "http://#{request.host}:#{request.port}/invitations/#{@invitation.token}" %>
+        <% end %>
     <% else %>
         <p>You dont have any link generated, you can do it here:</p>
-        <%= link_to "Invites", invite_path %>
+        <%= link_to "Invite", invite_path, class: "btn btn-primary" %>
     <% end %>
 </section>

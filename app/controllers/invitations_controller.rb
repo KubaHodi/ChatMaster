@@ -29,7 +29,7 @@ class InvitationsController < ApplicationController
             )
             @invitation.mode = :by_link
             @invitation.token = @invitation.generate_token
-            link = Invitation.where(user_id: logged_user.id)
+            link = Invitation.where(user_id: logged_user.id, username: nil)
             if link.count >= 1
                 redirect_to root_path, alert: "You already have your unique token!"
             else

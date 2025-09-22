@@ -6,6 +6,6 @@ class SecureInfoController < ApplicationController
   end
 
   def show
-      @invitation = Invitation.find_by(user_id: logged_user.id)
+      @invitation = Invitation.find_by(user_id: logged_user.id, username: nil)
   end
 end
