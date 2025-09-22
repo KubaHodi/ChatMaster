@@ -2,24 +2,32 @@ class InvitationsController < ApplicationController
     before_action :normalize_user_invites, only: %w[ create ]
     def new
         @invitation = Invitation.new
+        @invitation_link = Invitation.new
     end
 
     def create
-        target_user = User.find_by(
-            username: params[:invitation][:username]
-        )
-        @invitation = Invitation.new(
-            user: logged_user,
-            friend: target_user,
-            status: 0
-        )
-        @invitation.token = @invitation.generate_token
+            target_user = User.find_by(
+                username: params[:invitation][:username]
+            )
+            @invitation = Invitation.new(
+                user: logged_user,
+                friend: target_user,
+                status: 0
+            )
+            @invitation.token = @invitation.generate_token
             if @invitation.save
                 InvitationMailer.send_invitation(@invitation).deliver_later
                 redirect_to root_path, alert: "Invitation had been sent"
             else
                 render :new, status: 422
             end
+    end
+
+    def create_using_link
+        @invitation_link = Invitation.new(
+            user: logged_user,
+            token: @invitation_link.generate_token
+        )
     end
 
     def show
@@ -50,6 +58,10 @@ class InvitationsController < ApplicationController
 
         target_user = User.find_by(username: target_username)
 
+        if target_user == logged_user
+            redirect_to root_path
+        end
+        
         if !target_user.nil?
             if Invitation.exists?(
                 user_id: logged_user.id,
