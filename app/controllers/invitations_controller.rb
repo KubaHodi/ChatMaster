@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-    before_action :normalize_user_invites, only: %w[ create ]
+    before_action :normalize_user_invites, only: %w[ create destroy ]
     def new
         @invitation = Invitation.new
     end
@@ -53,7 +53,14 @@ class InvitationsController < ApplicationController
     def update
     end
 
-    def delete
+    def destroy
+        @invitation = Invitation.find_by(token: params[:token])
+        if @invitation
+            @invitation.destroy
+            redirect_to invite_path, alert: "Successfully deleted pending invitation"
+        else
+            redirect_to invite_path, alert: "Couldn't delete invitation"
+        end
     end
 
     private
