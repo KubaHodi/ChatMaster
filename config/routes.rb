@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get "secure_info/index"
+  post "secure_info/index"
+  get "secure_info/show"
   get "memberships/new"
   get "memberships/show"
   get "memberships/create"
