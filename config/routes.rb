@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
     get "invitations" => :index
     get '/invitations/:token', to: 'invitations#show', as: "accept_invitation"
+    delete '/invitations/:token', to: 'invitations#destroy', as: "destroy_invitation"
     patch '/invitations/:token', to: 'invitations#update', as: "update_invitation" 
   end
   
