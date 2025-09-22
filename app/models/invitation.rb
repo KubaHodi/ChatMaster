@@ -28,7 +28,7 @@ class Invitation < ApplicationRecord
 
     private
     def schedule_expiration
-        PendingInvitationsCleanupJob.set(wait: 6.hours).perform_later(self.id)
+        PendingInvitationsCleanupJob.set(wait: 6.hours).perform_now(self.id)
     end
 
     def copy_username_from_friend
