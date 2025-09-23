@@ -4,6 +4,7 @@ class MembershipsController < ApplicationController
   end
 
   def show
+    @invitation = Invitation.find_by(user_id: params[:user_id], friend_id: logged_user.id)
   end
 
   def create
@@ -22,6 +23,10 @@ class MembershipsController < ApplicationController
       else
         Rails.logger.error membership.errors.full_messages.to_sentence
       end
+  end
+
+  def update
+    @invitation = Invitation.find_by(user_id: params[:user_id], friend_id: logged_user.id)
   end
 
   def delete

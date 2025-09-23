@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
   resources :users do
     get :friends, on: :collection
+    get 'membership' => :show, to: "memberships#show", as: "show_membership"
   end
 
   controller :invitations do
