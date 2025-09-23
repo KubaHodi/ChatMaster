@@ -27,6 +27,13 @@ class MembershipsController < ApplicationController
 
   def update
     @invitation = Invitation.find_by(user_id: params[:user_id], friend_id: logged_user.id)
+    @invitation.status = 3
+    if @invitation.update(
+      user_id: params[:user_id],
+      friend_id: logged_user.id
+    )
+    redirect_to friends_users_path, alert: "Successfully blocked user"
+    end
   end
 
   def delete
