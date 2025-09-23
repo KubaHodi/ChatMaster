@@ -5,6 +5,7 @@
     <%= image_tag url_for(friend.avatar), size: "100x100" %>
     <p><%=friend.username%></p>
     <%= link_to "#{friend.username}", user_path(friend), class: "btn btn-primary"  %>
+    <%= link_to "Actions", user_show_membership_path(user_id: friend.id), method: :get, class: "btn btn-info" %>
     </div>
     <% end %>
 <% else %>
