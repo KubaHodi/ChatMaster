@@ -26,7 +26,11 @@ Rails.application.routes.draw do
   resources :users do
     get :friends, on: :collection
     get 'membership' => :show, to: "memberships#show", as: "show_membership"
-    patch 'membership' => :update, to: "memberships#update", as: "update_membership"
+    resources :memberships, only: [:show, :update] do
+      member do
+        patch :block
+        patch :unblock
+      end
   end
 
   controller :invitations do
@@ -41,6 +45,7 @@ Rails.application.routes.draw do
   
   resources :invitations do
     resources :memberships, only: :create
+    end
   end
 
   controller :rooms do
