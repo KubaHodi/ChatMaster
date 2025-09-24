@@ -6,6 +6,6 @@
         <% end %>
     <% else %>
         <p>You dont have any link generated, you can do it here:</p>
-        <%= link_to "Invite", invite_path, class: "btn btn-primary" %>
+        <%= link_to "Invite", user_invite_path(logged_user), class: "btn btn-primary" %>
     <% end %>
 </section>

@@ -34,7 +34,7 @@ class InvitationsController < ApplicationController
                 redirect_to root_path, alert: "You already have your unique token!"
             else
                 if @invitation.save
-                    redirect_to invite_path, alert: "Your link: http://localhost:3000/invitations/#{@invitation.token}"
+                    redirect_to user_invite_path, alert: "Your link: http://localhost:3000/invitations/#{@invitation.token}"
                 end
             end
         end
@@ -57,9 +57,9 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.find_by(token: params[:token])
         if @invitation
             @invitation.destroy
-            redirect_to invite_path, alert: "Successfully deleted pending invitation"
+            redirect_to user_invite_path, alert: "Successfully deleted pending invitation"
         else
-            redirect_to invite_path, alert: "Couldn't delete invitation"
+            redirect_to user_invite_path, alert: "Couldn't delete invitation"
         end
     end
 
@@ -76,7 +76,7 @@ class InvitationsController < ApplicationController
         target_user = User.find_by(username: target_username)
 
         if target_user == logged_user
-            redirect_to invite_path, alert: "You can't invite yourself"
+            redirect_to user_invite_path, alert: "You can't invite yourself"
         end
 
         if !target_user.nil?
@@ -90,14 +90,14 @@ class InvitationsController < ApplicationController
                 friend_id: logged_user.id,
                 status: 1
             )
-            redirect_to(invite_path, alert: "You are already friends") and return
+            redirect_to(user_invite_path, alert: "You are already friends") and return
             end
             if Invitation.exists?(
                 user_id: logged_user.id,
                 friend_id: target_user.id,
                 status: 0
             )
-                redirect_to(invite_path, alert: "You already invited this user") and return
+                redirect_to(user_invite_path, alert: "You already invited this user") and return
             end
 
             if Invitation.exists?(
@@ -106,10 +106,10 @@ class InvitationsController < ApplicationController
                 status: 0
                 
             )
-                redirect_to(invite_path, alert: "You have pending friend request from this user") and return
+                redirect_to(user_invite_path, alert: "You have pending friend request from this user") and return
             end
         else 
-        redirect_to invite_path, notice: "This username does not exist"
+        redirect_to user_invite_path, notice: "This username does not exist"
         end
     end
 end

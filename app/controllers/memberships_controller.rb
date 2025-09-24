@@ -4,7 +4,7 @@ class MembershipsController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.find_by(user_id: params[:user_id], friend_id: logged_user.id)
+    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
   end
 
   def create
@@ -25,15 +25,24 @@ class MembershipsController < ApplicationController
       end
   end
 
-  def update
-    @invitation = Invitation.find_by(user_id: params[:user_id], friend_id: logged_user.id)
-    @invitation.status = 3
-    if @invitation.update(
-      user_id: params[:user_id],
-      friend_id: logged_user.id
-    )
-    redirect_to friends_users_path, alert: "Successfully blocked user"
-    end
+  def block
+    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
+      @invitation.status = 3
+      if @invitation.update(
+        friend_id: logged_user.id
+      )
+      redirect_to friends_users_path, alert: "Successfully blocked user"
+      end
+  end
+
+  def unblock
+     @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
+      @invitation.status = 1
+      if @invitation.update(
+        friend_id: logged_user.id
+      )
+      redirect_to friends_users_path, alert: "Successfully unblocked user"
+      end
   end
 
   def delete

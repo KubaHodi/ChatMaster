@@ -1,7 +1,7 @@
 <div class="text-white container">
     <div class="bg-dark">
         <h1>Invite by username</h1>
-        <%= form_with model: @invitation, url: invite_path, method: :post, local: true do |f| %>
+        <%= form_with model: @invitation, url: user_invite_path, method: :post, local: true do |f| %>
            <%= hidden_field_tag :form_type, "username" %>
             <%= f.text_field :username %>
             <%= f.label :username %>   
@@ -12,7 +12,7 @@
 
     <div class="bg-dark">
         <h1>Invite by link</h1>
-        <%= form_with model: @invitation, url: invite_path, method: :post, local: true do |f| %>
+        <%= form_with model: @invitation, url: user_invite_path, method: :post, local: true do |f| %>
             <%= hidden_field_tag :form_type, "link" %>
             <%= f.submit "Generate link" %>
         <% end %>
