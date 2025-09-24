@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     before_action :authorize_friendship, only: %w[ show ]
     before_action :deny_entrance, only: %w[ edit update ]
     before_action :check_logged_user, only: %w[ new ]
+    before_action :check_blocked_user, only: %w[ show ]
     def index
         @users = User.all
     end
@@ -100,6 +101,13 @@ class UsersController < ApplicationController
     def check_logged_user
         if logged_user.present?
             redirect_to root_path, alert: "You are already logged in"
+        end
+    end
+
+    def check_blocked_user
+        @invitation = Invitation.find_by(friend_id: logged_user.id)
+        if @invitation.status == "blocked"
+            redirect_to friends_users_path, alert: "This user is blocked"
         end
     end
 end
