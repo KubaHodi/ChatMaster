@@ -36,6 +36,14 @@
               </div>
               
               <div data-mdb-input-init class="form-outline form-white mb-4">
+                <%= form.radio_button :status, "public", class: "form-control form-control-lg" %>
+                <%= form.label :status_public, "public" %>
+
+                <%= form.radio_button :status, "private", class: "form-control form-control-lg" %>
+                <%= form.label :status_private, "private" %>
+              </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
                 <%= form.file_field :avatar, placeholder: "You can change it later or leave it for default avatar", class: "form-control form-control-lg" %>
                 <%= form.label :avatar, "Avatar" %>
               </div>

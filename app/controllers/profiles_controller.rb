@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles or /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = Profile.where(status: 0)
   end
 
   # GET /profiles/1 or /profiles/1.json
