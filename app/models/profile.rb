@@ -1,4 +1,4 @@
 class Profile < ApplicationRecord
-    has_one :user
+    belongs_to :user, dependent: :destroy
     validates :user, presence: true
 end

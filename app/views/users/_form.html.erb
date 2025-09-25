@@ -6,7 +6,7 @@
           <div class="card-body p-5 text-center">
 
             <div class="mb-md-5 mt-md-4 pb-5">
-            <%= form_with model: user, url: register_path do |form| %>
+            <%= form_with model: [ @profile, @user ], url: register_path do |form| %>
             <% if @user.errors.any? %>
               <p class="text-danger"><%= @user.errors.full_messages.join(', ') %></p>
             <% end %>

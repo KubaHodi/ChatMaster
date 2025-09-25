@@ -29,15 +29,22 @@ class UsersController < ApplicationController
 
     def new
         @user = User.new
+        @profile = Profile.new
     end
 
     def create
         @user = User.new(user_params)
-
         respond_to do |format|
             if @user.save
+                @profile = Profile.new(user_id: @user.id, created_at: @user.created_at, updated_at: @user.updated_at)
+                debugger
+                if @profile.save
                 format.html { redirect_to login_path, notice: "Successfully created user" }
                 format.json { render :show, status: :created, location: @user }
+                else
+                    format.html { render :new, status: :unprocessable_entity }
+                    format.json { render json: @profile.errors, status: :unprocessable_entity }
+                end
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @user.errors, status: :unprocessable_entity }
