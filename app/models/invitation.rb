@@ -1,5 +1,6 @@
 class Invitation < ApplicationRecord
     enum :status, { pending: 0, accepted: 1, declined: 2, blocked: 3 }
+    enum :status_invited, { pending_invited: 0, accepted_invited: 1, declined_invited: 2, blocked_invited: 3 }
     enum :blocked_by, { inviter: 0, invitator: 1 }
     belongs_to :user
     belongs_to :friend, class_name: "User", optional: true
