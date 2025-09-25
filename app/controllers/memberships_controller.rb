@@ -37,7 +37,7 @@ class MembershipsController < ApplicationController
           end
     else
       @invitation.blocked_by = "invited"
-        @invitation.status_invitator = 3
+        @invitation.status_invited = 3
           if @invitation.update(
             friend_id: logged_user.id
           )
@@ -56,7 +56,7 @@ class MembershipsController < ApplicationController
           redirect_to friends_users_path, alert: "Successfully unblocked user"
           end
     else
-        @invitation.status_invitator = 1
+        @invitation.status_invited = 1
           if @invitation.update(
             friend_id: logged_user.id
           )
