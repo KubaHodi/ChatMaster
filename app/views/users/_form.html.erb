@@ -35,14 +35,17 @@
                 <%= form.label :email, "Email" %>
               </div>
               
-              <div data-mdb-input-init class="form-outline form-white mb-4">
-                <%= form.radio_button :status, "public", class: "form-control form-control-lg" %>
-                <%= form.label :status_public, "public" %>
+            
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <%= form.fields_for :profile do |pf| %>
+                    <%= pf.radio_button :status, "public_profile" %>
+                    <%= pf.label :status, "public"  %>
 
-                <%= form.radio_button :status, "private", class: "form-control form-control-lg" %>
-                <%= form.label :status_private, "private" %>
-              </div>
-
+                    <%= pf.radio_button :status, "private_profile" %>
+                    <%= pf.label :status, "private"  %>
+                  <% end %>
+                </div>
+             
               <div data-mdb-input-init class="form-outline form-white mb-4">
                 <%= form.file_field :avatar, placeholder: "You can change it later or leave it for default avatar", class: "form-control form-control-lg" %>
                 <%= form.label :avatar, "Avatar" %>

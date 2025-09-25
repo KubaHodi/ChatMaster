@@ -29,14 +29,14 @@ class UsersController < ApplicationController
 
     def new
         @user = User.new
-        @profile = Profile.new
+        @user.build_profile
     end
 
     def create
         @user = User.new(user_params)
         respond_to do |format|
             if @user.save
-                @profile = Profile.new(user_id: @user.id)
+                @profile = Profile.new(user_id: @user.id, status: params[:user][:profile_attributes][:status])
                 if @profile.save
                 format.html { redirect_to login_path, notice: "Successfully created user" }
                 format.json { render :show, status: :created, location: @user }
