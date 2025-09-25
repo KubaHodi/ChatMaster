@@ -36,8 +36,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         respond_to do |format|
             if @user.save
-                @profile = Profile.new(user_id: @user.id, created_at: @user.created_at, updated_at: @user.updated_at)
-                debugger
+                @profile = Profile.new(user_id: @user.id)
                 if @profile.save
                 format.html { redirect_to login_path, notice: "Successfully created user" }
                 format.json { render :show, status: :created, location: @user }
