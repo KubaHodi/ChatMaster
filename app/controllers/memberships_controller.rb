@@ -18,7 +18,7 @@ class MembershipsController < ApplicationController
       user: logged_user
     )
       if membership.save
-        invitation.update!(status: 1)
+        invitation.update!(status: 1, status_invited: 1)
         redirect_to friends_users_path, alert: "You are friends now!"
       else
         Rails.logger.error membership.errors.full_messages.to_sentence
@@ -26,23 +26,43 @@ class MembershipsController < ApplicationController
   end
 
   def block
-    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
+    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first  
+    if @invitation.user_id == logged_user.id
+      @invitation.blocked_by = "inviter"
       @invitation.status = 3
-      if @invitation.update(
-        friend_id: logged_user.id
-      )
-      redirect_to friends_users_path, alert: "Successfully blocked user"
-      end
+          if @invitation.update(
+            friend_id: logged_user.id
+          )
+          redirect_to friends_users_path, alert: "Successfully blocked user"
+          end
+    else
+      @invitation.blocked_by = "invited"
+        @invitation.status_invitator = 3
+          if @invitation.update(
+            friend_id: logged_user.id
+          )
+          redirect_to friends_users_path, alert: "Successfully blocked user"
+          end
+    end
   end
 
   def unblock
      @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
-      @invitation.status = 1
-      if @invitation.update(
-        friend_id: logged_user.id
-      )
-      redirect_to friends_users_path, alert: "Successfully unblocked user"
-      end
+    if @invitation.user_id == logged_user.id
+        @invitation.status = 1
+          if @invitation.update(
+            friend_id: logged_user.id
+          )
+          redirect_to friends_users_path, alert: "Successfully unblocked user"
+          end
+    else
+        @invitation.status_invitator = 1
+          if @invitation.update(
+            friend_id: logged_user.id
+          )
+          redirect_to friends_users_path, alert: "Successfully unblocked user"
+          end
+    end
   end
 
   def delete
