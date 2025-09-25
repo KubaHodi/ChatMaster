@@ -27,11 +27,12 @@ class MembershipsController < ApplicationController
 
   def block
     @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first  
+    user = @invitation.username
     if @invitation.user_id == logged_user.id
       @invitation.blocked_by = "inviter"
       @invitation.status = 3
           if @invitation.update(
-            friend_id: logged_user.id
+            friend_id: User.find_by(username: user)
           )
           redirect_to friends_users_path, alert: "Successfully blocked user"
           end
@@ -39,7 +40,7 @@ class MembershipsController < ApplicationController
       @invitation.blocked_by = "invited"
         @invitation.status_invited = 3
           if @invitation.update(
-            friend_id: logged_user.id
+            friend_id: User.find_by(username: user)
           )
           redirect_to friends_users_path, alert: "Successfully blocked user"
           end
@@ -48,17 +49,18 @@ class MembershipsController < ApplicationController
 
   def unblock
      @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
+     user = @invitation.username
     if @invitation.user_id == logged_user.id
         @invitation.status = 1
           if @invitation.update(
-            friend_id: logged_user.id
+            friend_id: User.find_by(username: user)
           )
           redirect_to friends_users_path, alert: "Successfully unblocked user"
           end
     else
         @invitation.status_invited = 1
           if @invitation.update(
-            friend_id: logged_user.id
+            friend_id: User.find_by(username: user)
           )
           redirect_to friends_users_path, alert: "Successfully unblocked user"
           end

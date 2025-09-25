@@ -106,12 +106,8 @@ class UsersController < ApplicationController
 
     def check_blocked_user
         @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
-        if @invitation.status == "blocked"
-            if @invitation.user_id == 1
-                redirect_to_friends
-            else
-                redirect_to_friends
-            end 
+        if @invitation.status == "blocked" || @invitation.status_invited == "blocked_invited"
+            redirect_to_friends
         end
     end
 
