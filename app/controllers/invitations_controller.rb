@@ -34,7 +34,7 @@ class InvitationsController < ApplicationController
                 redirect_to root_path, alert: "You already have your unique token!"
             else
                 if @invitation.save
-                    redirect_to user_invite_path, alert: "Your link: http://localhost:3000/invitations/#{@invitation.token}"
+                    redirect_to user_invite_path, alert: "Your link had been stored!"
                 end
             end
         end
