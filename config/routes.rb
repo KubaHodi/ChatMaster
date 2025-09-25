@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   get "secure_info/index"
   post "secure_info/index"
   get "secure_info/show"
