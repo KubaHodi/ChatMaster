@@ -2,7 +2,7 @@
     <% if @invitation.present? %>
         <% if @invitation.username.blank?%>
             <p>Your link for friends invitations:</p>
-            <%= "http://#{request.host}:#{request.port}/invitations/#{@invitation.token}" %>
+            <%= "http://#{request.host}:#{request.port}/users/#{@invitation.user_id}/invitations/#{@invitation.token}" %>
         <% end %>
     <% else %>
         <p>You dont have any link generated, you can do it here:</p>

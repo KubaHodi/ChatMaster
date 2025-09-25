@@ -26,7 +26,7 @@ class MembershipsController < ApplicationController
   end
 
   def block
-    @invitation = Invitation.where("user_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
+    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
       @invitation.status = 3
       if @invitation.update(
         friend_id: logged_user.id
