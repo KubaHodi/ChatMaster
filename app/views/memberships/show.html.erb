@@ -1,9 +1,8 @@
 <h1>Memberships#show</h1>
 <p>Find me in app/views/memberships/show.html.erb</p>
-<% if @invitation&.status == "accepted"%>
+<% if @invitation.status != "blocked_invited" && @invitation.status_invited != "blocked_invited" || @invitation.status == "blocked_invited" && @invitation.status_invited == "blocked_invited" %>
     <%= button_to "Block", block_user_membership_path(id: @invitation.id), method: :patch %>
 <% end %>
-
-<% if @invitation&.status == "blocked" %>
+<% if @invitation.status == "blocked" || @invitation.status_invited == "blocked_invited" && @invitation.status != "blocked" || @invitation.status_invited != "blocked_invited" %>
     <%= button_to "Unblock", unblock_user_membership_path(id: @invitation.id), method: :patch %>
 <% end %>

@@ -9,7 +9,7 @@ class Invitation < ApplicationRecord
     attr_accessor :mode
     with_options if: :by_username? do
         validates :username, presence: true, uniqueness: { scope: :user_id, condition: -> { where(status: "0") }, message: "has already been invited"}
-        validates :user_id, :friend_id, presence: true  
+        validates :user_id, presence: true  
     end
     with_options if: :by_link? do
         validates :token, presence: true, uniqueness: true
