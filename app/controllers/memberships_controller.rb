@@ -26,24 +26,21 @@ class MembershipsController < ApplicationController
   end
 
   def block
-    @invitation = Invitation.where("user_id=? OR friend_id=? OR username=?", logged_user.id, logged_user.id, logged_user.username).first
-    user = @invitation.username
-    if @invitation.user_id == logged_user.id
-      @invitation.blocked_by = "inviter"
-      @invitation.status = 3
-          if @invitation.update(
-            username: user
-          )
-          redirect_to friends_users_path, alert: "Successfully blocked user"
-          end
-    else
-      @invitation.blocked_by = "invited"
-        @invitation.status_invited = 3
-          if @invitation.update(
-            username: user
-          )
-          redirect_to friends_users_path, alert: "Successfully blocked user"
-          end
+    if @invitation = Invitation.find_by(user_id: params[:user_id])
+      if @invitation.user_id != logged_user.id
+        @invitation.blocked_by = "inviter"
+        @invitation.status = 3
+        user = User.find_by(id: @invitation.user_id)
+        debugger
+            redirect_to friends_users_path, alert: "Successfully blocked user"
+      else
+        @invitation.blocked_by = "invited"
+          @invitation.status_invited = 3
+          debugger
+            redirect_to friends_users_path, alert: "Successfully blocked user"
+      end
+    else @invitation = Invitation.find_by(friend_id: params[:user_id])
+      debugger
     end
   end
 
