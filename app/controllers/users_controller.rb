@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :set_user, only: %w[ edit update show ]
     before_action :check_user, only: %w[ show ]
     before_action :authorize_friendship, only: %w[ show ]
-    before_action :deny_entrance, only: %w[ edit update ]
+    before_action :deny_entrance, only: %w[ edit update show ]
     before_action :check_logged_user, only: %w[ new ]
     before_action :check_blocked_user, only: %w[ show ]
     def index
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        @current_user =  logged_user
+        @current_user = logged_user
         @users = User.all_except(@current_user)
 
         @rooms = Room.public_rooms
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     private
 
     def set_user
-        @user = User.find(params[:id])
+        @user = User.find(params[:id])  
     end
 
     def user_params

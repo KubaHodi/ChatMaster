@@ -34,6 +34,10 @@ Rails.application.routes.draw do
       end
   end
 
+  resources :friends, only: :show do
+    get "/friends", to: "users#show"
+  end
+  
   controller :invitations do
     get "invite" => :new
     post "invite" => :create
