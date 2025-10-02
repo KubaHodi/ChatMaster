@@ -3,11 +3,11 @@ class UsersController < ApplicationController
     before_action :set_user, only: %w[ edit update show ]
     before_action :check_user, only: %w[ show ]
     before_action :authorize_friendship, only: %w[ show ]
-    before_action :deny_entrance, only: %w[ edit update show ]
+    before_action :deny_entrance, only: %w[ edit update ]
     before_action :check_logged_user, only: %w[ new ]
     before_action :check_blocked_user, only: %w[ show ]
     def index
-        @users = User.all
+        @users = logged_user.friends
     end
 
     def show
@@ -71,7 +71,12 @@ class UsersController < ApplicationController
     private
 
     def set_user
-        @user = User.find(params[:id])  
+        begin
+        @user = User.find(params[:id])
+        rescue ActiveRecord::RecordNotFound => e
+            puts "Someone tried to access not valid user"
+            @user = User.find_by(id: logged_user)
+        end
     end
 
     def user_params
