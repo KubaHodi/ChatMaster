@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles or /profiles.json
   def index
-    @profiles = Profile.where(status: 0)
+    @profiles = Profile.where("status=? AND created_at > ?", 0, 2.minutes.ago)
   end
 
   # GET /profiles/1 or /profiles/1.json
