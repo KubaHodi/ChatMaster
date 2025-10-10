@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
+  before_action :check_profile, only: %i[ show ]
 
   # GET /profiles or /profiles.json
   def index
@@ -59,11 +60,26 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
+      begin
       @profile = Profile.find(params.expect(:id))
+      rescue
+        redirect_to root_path
+      end
     end
 
     # Only allow a list of trusted parameters through.
     def profile_params
       params.expect(profile: [ :user_id ])
+    end
+
+    def check_profile
+      @profile = Profile.find(params[:id])
+
+      if @profile.id == logged_user.id
+        redirect_to root_path
+      end
+      if @profile.status == "private_profile"
+          redirect_to root_path
+      end
     end
 end

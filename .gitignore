@@ -7,6 +7,10 @@
 # Ignore bundler config.
 /.bundle
 /vendor/bundle
+
+# Ignore discord RPC config
+/.vscode
+
 # Ignore all environment files.
 /.env*
 
