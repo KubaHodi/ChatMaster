@@ -74,12 +74,21 @@ class ProfilesController < ApplicationController
 
     def check_profile
       @profile = Profile.find(params[:id])
-
+      
       if @profile.id == logged_user.id
         redirect_to root_path
       end
+      
       if @profile.status == "private_profile"
-          redirect_to root_path
+          begin
+            friend = logged_user.friends.find(params[:id])
+            if @profile.id != friend.id
+              redirect_to root_path
+            end
+          rescue
+            redirect_to root_path
+          end
+          
       end
     end
 end
