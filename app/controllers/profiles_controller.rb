@@ -77,18 +77,12 @@ class ProfilesController < ApplicationController
       
       if @profile.id == logged_user.id
         redirect_to root_path
-      end
-      
-      if @profile.status == "private_profile"
+      elsif @profile.status == "private_profile"
           begin
             friend = logged_user.friends.find(params[:id])
-            if @profile.id != friend.id
-              redirect_to root_path
-            end
           rescue
             redirect_to root_path
           end
-          
       end
     end
 end
