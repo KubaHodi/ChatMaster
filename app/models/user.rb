@@ -18,7 +18,7 @@ def broadcast_user
     partial: "users/user",
     locals: { user: self }
   )
-end partial _user i dołączamy go do diva gdzie są wyświetlani użytkownicy id="users" oraz używamy turbo_stream from "users" aby odebrać ten przesył
+end
   after_create_commit :add_default_avatar
   def self.ransackable_attributes(auth_object = nil)
     %w[ username ]
