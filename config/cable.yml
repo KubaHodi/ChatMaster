@@ -9,4 +9,4 @@ test:
   adapter: test
 
 production:
-  adapter: solid_cable
+  adapter: async
