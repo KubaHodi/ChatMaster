@@ -6,7 +6,7 @@
     <div id="room_container" class="bg-dark vh-100" data-controller="scroll" data-scroll-target="messages" >
         <% if @room %>
             <div id="room" >
-                <%= turbo_stream_from @single_room %>
+                <%= turbo_stream_from [@single_room, "messages"] %>
                 <div id="messages">
                     <%= render @messages %>
                 </div>

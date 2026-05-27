@@ -5,7 +5,16 @@ class Message < ApplicationRecord
   validates :content, presence: :true
   before_create :confirm_participant
   
-  after_create_commit { broadcast_append_to room, target: "messages" }
+  after_create_commit :broadcast_message
+
+def broadcast_message
+  broadcast_append_to(
+    [room, "messages"],
+    target: "messages",
+    partial: "messages/message",
+    locals: { message: self }
+  )
+end
 
   def confirm_participant
     if self.room.is_private
