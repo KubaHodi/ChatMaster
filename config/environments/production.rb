@@ -58,26 +58,28 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
 
 
+  # Mailer
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
 
-config.action_mailer.default_url_options = {
-  host: "chatmaster-mbie.onrender.com",
-  protocol: "https"
-}
+  config.action_mailer.default_url_options = {
+    host: "chatmaster-mbie.onrender.com",
+    protocol: "https"
+  }
 
-config.action_mailer.smtp_settings = {
-  address: ENV["SMTP_ADDRESS"],
-  port: ENV.fetch("SMTP_PORT", 587).to_i,
-  user_name: ENV["SMTP_USERNAME"],
-  password: ENV["SMTP_PASSWORD"],
-  authentication: :plain,
-  enable_starttls_auto: true
-}
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_ADDRESS"),
+    port: ENV.fetch("SMTP_PORT", 587).to_i,
+    user_name: ENV.fetch("SMTP_USERNAME"),
+    password: ENV.fetch("SMTP_PASSWORD"),
+    authentication: :plain,
+    enable_starttls_auto: true,
+    open_timeout: 10,
+    read_timeout: 10
+  }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {

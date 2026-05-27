@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV.fetch("MAILER_FROM", "no-reply@chatmaster-mbie.onrender.com")
+  default from: ENV.fetch("MAILER_FROM", ENV.fetch("SMTP_USERNAME"))
   layout "mailer"
 end
