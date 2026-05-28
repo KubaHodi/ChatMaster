@@ -3,9 +3,10 @@
     <% @friends.each do |friend| %>
     <div class="bg-dark d-block text-white">
     <%if friend.avatar.attached? %>
-    <%= image_tag url_for(friend.avatar), size: "100x100" %>
+    <%= image_tag friend.avatar, size: "100x100" %>
     <%else%>
-    <%= image_tag url_for(friend.avatar), size: "100x100" %>
+    <%= image_tag "default_avatar.png", size: "100x100" %>
+    <%end%>
     <p><%=friend.username%></p>
     <%= link_to "#{friend.username}", user_path(friend), class: "btn btn-primary"  %>
     <%= link_to "Actions", user_show_membership_path(user_id: friend.id), method: :get, class: "btn btn-info" %>
