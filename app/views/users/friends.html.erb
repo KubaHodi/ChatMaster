@@ -2,6 +2,9 @@
 <%if @friends.any? %>
     <% @friends.each do |friend| %>
     <div class="bg-dark d-block text-white">
+    <%if friend.avatar.attached? %>
+    <%= image_tag url_for(friend.avatar), size: "100x100" %>
+    <%else%>
     <%= image_tag url_for(friend.avatar), size: "100x100" %>
     <p><%=friend.username%></p>
     <%= link_to "#{friend.username}", user_path(friend), class: "btn btn-primary"  %>
